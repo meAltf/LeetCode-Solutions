@@ -37,27 +37,37 @@ Output: []
  *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
  * }
  */
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
 class Solution {
-    public ListNode removeElements(ListNode head, int val) {
-        if(head == null)
-            return null;
 
-        ListNode dummy = new ListNode(-1);
-        dummy.next = head;
-        ListNode prev = dummy;
-        ListNode curr = head;
-        
-        while(curr != null){
-          
-            if(curr.val == val){
-                prev.next = curr.next;
-                curr = curr.next;
-            }
-            else{
-                prev = curr;
-                curr = curr.next;
-            }    
+    public ListNode removeElements(ListNode head, int val) {
+
+        //check for first node' val == val
+
+        while (head != null && head.val == val) {
+
+            head = head.next;
         }
-        return dummy.next;
+
+        ListNode temp = head;
+
+        while (head != null) {
+            
+            if (head.next != null && head.next.val == val) {
+                head.next = head.next.next;
+                continue;
+            }
+            head = head.next;
+        }
+        return temp;
     }
 }
